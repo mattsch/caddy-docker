@@ -1,0 +1,17 @@
+language: generic
+sudo: required
+services:
+- docker
+
+env:
+  global:
+  - IMG_NAME="docker.io/mattsch/caddy-docker"
+  - VER="0.10.12"
+
+script:
+  - 'docker login -u "$D_U" -p "$D_P"'
+  - 'docker build --build-arg version=${VER} -t ${IMG_NAME}:${VER/v} -t ${IMG_NAME}:latest .'
+  - 'docker push ${IMG_NAME}:${VER/v}'
+  - 'docker push ${IMG_NAME}:latest'
+
+if: branch = master
