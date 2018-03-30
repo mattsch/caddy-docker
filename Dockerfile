@@ -17,9 +17,6 @@ LABEL maintainer "Matthew Schick <matthew.schick@gmail.com>"
 ARG version="0.10.12"
 LABEL caddy_version="$version"
 
-# Let's Encrypt Agreement
-ENV ACME_AGREE="false"
-
 RUN apk add --no-cache openssh-client git
 
 # install caddy
@@ -33,4 +30,4 @@ EXPOSE 80 443
 VOLUME /root/.caddy /srv
 
 ENTRYPOINT ["caddy"]
-CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=$ACME_AGREE"]
+CMD ["-conf", "/etc/Caddyfile", "-log", "stdout", "-agree"]
