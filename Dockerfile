@@ -3,7 +3,7 @@
 #
 FROM abiosoft/caddy:builder as builder
 
-ARG version="0.10.12"
+ARG version="0.11.5"
 ARG plugins="git,cloudflare,proxyprotocol,prometheus"
 
 RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
@@ -11,10 +11,10 @@ RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
 #
 # Final stage
 #
-FROM alpine:3.7
+FROM alpine:3.9
 LABEL maintainer "Matthew Schick <matthew.schick@gmail.com>"
 
-ARG version="0.10.12"
+ARG version="0.11.5"
 LABEL caddy_version="$version"
 
 RUN apk add --no-cache openssh-client git
