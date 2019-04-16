@@ -3,6 +3,9 @@
 #
 FROM abiosoft/caddy:builder as builder
 
+ARG GOARCH="arm"
+ARG GOARM="7"
+
 ARG version="0.11.5"
 ARG plugins="git,cloudflare,proxyprotocol,prometheus"
 
@@ -11,7 +14,10 @@ RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
 #
 # Final stage
 #
-FROM alpine:3.9
+FROM balenalib/raspberrypi3-alpine:3.9
+
+RUN [ "cross-build-start" ]
+
 LABEL maintainer "Matthew Schick <matthew.schick@gmail.com>"
 
 ARG version="0.11.5"
@@ -25,6 +31,8 @@ COPY --from=builder /install/caddy /usr/bin/caddy
 # validate install
 RUN /usr/bin/caddy -version
 RUN /usr/bin/caddy -plugins
+
+RUN [ "cross-build-end" ]
 
 EXPOSE 80 443
 VOLUME /root/.caddy /srv
