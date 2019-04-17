@@ -7,7 +7,7 @@ ARG GOARCH="arm"
 ARG GOARM="7"
 
 ARG version="0.11.5"
-ARG plugins="git,cloudflare,proxyprotocol,prometheus,realip"
+ARG plugins="prometheus,filebrowser,cors,expires,cache,git,cloudflare,proxyprotocol,realip,ipfilter"
 
 RUN VERSION=${version} PLUGINS=${plugins} GOARCH=${GOARCH} GOARM=${GOARM} /bin/sh /usr/bin/builder.sh
 
