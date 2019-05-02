@@ -7,7 +7,7 @@ ARG GOARCH="arm"
 ARG GOARM="7"
 
 ARG version="1.0.0"
-ARG plugins="prometheus,filebrowser,cors,expires,cache,git,cloudflare,proxyprotocol,realip,ipfilter"
+ARG plugins="filebrowser,cors,expires,cache,git,cloudflare,proxyprotocol,realip,ipfilter"
 
 # process wrapper
 RUN go get -v github.com/abiosoft/parent
@@ -17,7 +17,7 @@ RUN VERSION=${version} PLUGINS=${plugins} GOARCH=${GOARCH} GOARM=${GOARM} /bin/s
 #
 # Final stage
 #
-FROM balenalib/raspberrypi3:stretch
+FROM balenalib/raspberrypi3-alpine:3.9
 
 RUN [ "cross-build-start" ]
 
