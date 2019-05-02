@@ -6,7 +6,7 @@ FROM abiosoft/caddy:builder as builder
 ARG GOARCH="arm"
 ARG GOARM="7"
 
-ARG version="0.11.5"
+ARG version="1.0.0"
 ARG plugins="prometheus,filebrowser,cors,expires,cache,git,cloudflare,proxyprotocol,realip,ipfilter"
 
 RUN VERSION=${version} PLUGINS=${plugins} GOARCH=${GOARCH} GOARM=${GOARM} /bin/sh /usr/bin/builder.sh
@@ -20,7 +20,7 @@ RUN [ "cross-build-start" ]
 
 LABEL maintainer "Matthew Schick <matthew.schick@gmail.com>"
 
-ARG version="0.11.5"
+ARG version="1.0.0"
 LABEL caddy_version="$version"
 
 RUN apk add --no-cache openssh-client git
