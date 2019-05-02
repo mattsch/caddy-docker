@@ -7,7 +7,7 @@ ARG GOARCH="arm"
 ARG GOARM="7"
 
 ARG version="1.0.0"
-ARG plugins="filebrowser,cors,expires,cache,git,cloudflare,proxyprotocol,realip,ipfilter"
+ARG plugins="prometheus,filebrowser,cors,expires,cache,git,cloudflare,proxyprotocol,realip,ipfilter"
 
 # process wrapper
 RUN go get -v github.com/abiosoft/parent
