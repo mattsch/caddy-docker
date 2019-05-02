@@ -9,6 +9,9 @@ ARG GOARM="7"
 ARG version="1.0.0"
 ARG plugins="prometheus,filebrowser,cors,expires,cache,git,cloudflare,proxyprotocol,realip,ipfilter"
 
+# process wrapper
+RUN go get -v github.com/abiosoft/parent
+
 RUN VERSION=${version} PLUGINS=${plugins} GOARCH=${GOARCH} GOARM=${GOARM} /bin/sh /usr/bin/builder.sh
 
 #
@@ -23,6 +26,9 @@ LABEL maintainer "Matthew Schick <matthew.schick@gmail.com>"
 ARG version="1.0.0"
 LABEL caddy_version="$version"
 
+# Let's Encrypt Agreement
+ENV ACME_AGREE="true"
+
 RUN apk add --no-cache openssh-client git
 
 # install caddy
@@ -36,6 +42,10 @@ RUN [ "cross-build-end" ]
 
 EXPOSE 80 443
 VOLUME /root/.caddy /srv
+WORKDIR /srv
 
-ENTRYPOINT ["caddy"]
-CMD ["-conf", "/etc/Caddyfile", "-log", "stdout", "-agree"]
+# install process wrapper
+COPY --from=builder /go/bin/parent /bin/parent
+
+ENTRYPOINT ["/bin/parent", "caddy"]
+CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=$ACME_AGREE"]
