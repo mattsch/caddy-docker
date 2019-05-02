@@ -17,7 +17,7 @@ RUN VERSION=${version} PLUGINS=${plugins} GOARCH=${GOARCH} GOARM=${GOARM} /bin/s
 #
 # Final stage
 #
-FROM balenalib/raspberrypi3-alpine:3.9
+FROM balenalib/raspberrypi3:stretch
 
 RUN [ "cross-build-start" ]
 
