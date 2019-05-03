@@ -6,11 +6,11 @@ services:
 env:
   global:
   - IMG_NAME="docker.io/mattsch/caddy-docker"
-  - VER="0.11.5"
+  - VER="1.0.0"
 
 script:
   - 'docker login -u "$D_U" -p "$D_P"'
-  - 'docker build --build-arg version=${VER} -t ${IMG_NAME}:${VER/v} -t ${IMG_NAME}:latest .'
+  - 'docker build --build-arg VERSION=${VER} -t ${IMG_NAME}:${VER/v} -t ${IMG_NAME}:latest .'
   - 'docker push ${IMG_NAME}:${VER/v}'
   - 'docker push ${IMG_NAME}:latest'
 
