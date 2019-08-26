@@ -6,7 +6,7 @@ services:
 env:
   global:
   - IMG_NAME="docker.io/mattsch/caddy-docker"
-  - VER="1.0.0"
+  - VER="1.0.3"
 
 script:
   - 'docker login -u "$D_U" -p "$D_P"'
