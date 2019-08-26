@@ -6,7 +6,7 @@ FROM abiosoft/caddy:builder as builder
 env GOARCH="arm" GOARM="7" GOOS="linux"
 
 ARG VERSION="1.0.3"
-ARG PLUGINS="prometheus,cors,expires,cache,git,cloudflare,proxyprotocol,realip,ipfilter"
+ARG PLUGINS="prometheus,cors,expires,cache,git,cloudflare,proxyprotocol,realip"
 
 # process wrapper
 RUN go get -v github.com/abiosoft/parent
