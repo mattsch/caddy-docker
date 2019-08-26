@@ -5,7 +5,7 @@ FROM abiosoft/caddy:builder as builder
 
 env GOARCH="arm" GOARM="7" GOOS="linux"
 
-ARG VERSION="1.0.0"
+ARG VERSION="1.0.3"
 ARG PLUGINS="prometheus,cors,expires,cache,git,cloudflare,proxyprotocol,realip,ipfilter"
 
 # process wrapper
@@ -18,13 +18,13 @@ RUN /usr/bin/builder.sh
 #
 # Final stage
 #
-FROM balenalib/raspberrypi3-alpine:3.9
+FROM balenalib/raspberrypi3-alpine:3.10
 
 RUN [ "cross-build-start" ]
 
 LABEL maintainer "Matthew Schick <matthew.schick@gmail.com>"
 
-ARG version="1.0.0"
+ARG version="1.0.3"
 LABEL caddy_version="$version"
 
 # Let's Encrypt Agreement
